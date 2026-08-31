@@ -1,0 +1,23 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    N DW 10
+    SUM DW 0
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    MOV AX, 0
+    MOV CX, N
+
+SUM_LOOP:
+    ADD AX, CX
+    LOOP SUM_LOOP
+
+    MOV SUM, AX
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
