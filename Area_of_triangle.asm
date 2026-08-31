@@ -1,0 +1,21 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    BASE DB 6
+    HEIGHT DB 8
+    AREA DB ?
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    MOV AL, BASE
+    MUL HEIGHT       ; AX = BASE * HEIGHT
+    MOV BL, 2
+    DIV BL           ; AL = AX / 2
+    MOV AREA, AL
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
