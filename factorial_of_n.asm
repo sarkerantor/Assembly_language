@@ -1,0 +1,23 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    N DW 5
+    FACT DW 1
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    MOV AX, 1
+    MOV CX, N
+
+FACT_LOOP:
+    MUL CX           ; AX = AX * CX
+    LOOP FACT_LOOP
+
+    MOV FACT, AX
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
