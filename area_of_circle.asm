@@ -1,0 +1,20 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    RADIUS DB 5
+    PI DB 3
+    AREA DW ?
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    MOV AL, RADIUS
+    MUL RADIUS       ; AX = R^2
+    MUL PI           ; AX = R^2 * PI
+    MOV AREA, AX
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
