@@ -1,0 +1,30 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    N DW 6
+    FIB DB 10 DUP(?)
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    MOV SI, OFFSET FIB
+    MOV AL, 0
+    MOV [SI], AL
+    INC SI
+    MOV AL, 1
+    MOV [SI], AL
+
+    MOV CX, N
+    SUB CX, 2
+L1:
+    MOV AL, [SI-1]
+    ADD AL, [SI]
+    INC SI
+    MOV [SI], AL
+    LOOP L1
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
