@@ -1,0 +1,28 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    STR DB 'ASSEMBLY$', 0
+    LEN DB 0
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    MOV SI, OFFSET STR
+    MOV CL, 0
+
+COUNT_LOOP:
+    MOV AL, [SI]
+    CMP AL, '$'
+    JE DONE
+    INC CL
+    INC SI
+    JMP COUNT_LOOP
+
+DONE:
+    MOV LEN, CL
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
