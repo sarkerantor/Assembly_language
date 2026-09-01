@@ -27,3 +27,54 @@ END_PROG:
     INT 21H
 MAIN ENDP
 END MAIN
+
+
+
+
+
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+    MARKS DB 85
+    GRADE DB ?
+    MSG DB 'Grade: $'
+
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    ; Grade Logic
+    MOV AL, MARKS
+    CMP AL, 80
+    JGE GRADE_A
+    CMP AL, 60
+    JGE GRADE_B
+    MOV GRADE, 'F'
+    JMP DISPLAY
+
+GRADE_A:
+    MOV GRADE, 'A'
+    JMP DISPLAY
+
+GRADE_B:
+    MOV GRADE, 'B'
+
+DISPLAY:
+    ; Message Print
+    MOV AH, 09H
+    LEA DX, MSG
+    INT 21H
+
+    ; Print Grade Character
+    MOV DL, GRADE
+    MOV AH, 02H
+    INT 21H
+
+    ; Exit Program
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
